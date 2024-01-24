@@ -8,6 +8,7 @@ dev-start-local:
 	open http://localhost:5173/
 
 dev-deploy-kind:
+	helm delete shank-vue -n shank
 	helm install shank-vue ./helm -n shank
 
 build-image:
