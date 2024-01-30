@@ -9,11 +9,10 @@ dev-start-local:
 
 dev-deploy-kind:
 	if [ "$(shell kubectl get namespace shank -o 'jsonpath={.status.phase}')" == "Active" ]; then \
-        kubectl delete namespace shank; \
+		echo "Namespace already exists"; \
     else \
-        echo "Namespace doesn't exist"; \
+        kubectl create namespace shank; \
     fi
-	kubectl create namespace shank
 	helm install shank-vue ./helm -n shank
 
 dev-delete-kind:

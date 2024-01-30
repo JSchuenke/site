@@ -1,0 +1,9 @@
+dependencies:
+- name: shank-vue
+  repository: file://../shank-vue/helm
+  version: 0.1.0
+- name: shank-flask
+  repository: file://../shank-flask/helm
+  version: 0.1.0
+digest: sha256:a99b708af279259130fb7294fe467eeb36aea6d8305512500ede009006da955c
+generated: "2024-01-30T15:05:41.876114-05:00"
