@@ -5,5 +5,8 @@ dependencies:
 - name: shank-flask
   repository: file://../shank-flask/helm
   version: 0.1.0
-digest: sha256:a99b708af279259130fb7294fe467eeb36aea6d8305512500ede009006da955c
-generated: "2024-01-30T15:05:41.876114-05:00"
+- name: shank-go
+  repository: file://../shank-go/helm
+  version: 0.1.0
+digest: sha256:713702bf657cea421638233b8b41014a073a9d662df8c7acb8fcf0f2af09b720
+generated: "2024-02-02T13:21:49.793123-05:00"

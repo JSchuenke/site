@@ -1,4 +1,4 @@
-REPOS := shank-flask shank-vue
+REPOS := shank-flask shank-vue shank-go
 
 .PHONY: all
 all: deploy-kind delete-kind dev-deploy-kind build-images
@@ -27,5 +27,5 @@ dev-deploy-kind:
 		echo "Namespace doesn't exist"; \
 		kubectl create namespace shank; \
 	fi
-	cd helm; helm dependency build
+	cd helm; helm dependency update
 	helm install shank-site ./helm -n shank
