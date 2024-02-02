@@ -27,5 +27,11 @@ dev-deploy-kind:
 		echo "Namespace doesn't exist"; \
 		kubectl create namespace shank; \
 	fi
+
 	cd helm; helm dependency update
-	helm install shank-site ./helm -n shank
+
+	if [ "$(shell helm list --namespace shank -o json | jq '.[0].status')" == "deployed" ]; then \
+		helm upgrade shank-site ./helm -n shank; \
+	else \
+		helm install shank-site ./helm -n shank; \
+	fi
