@@ -35,6 +35,6 @@ FROM ubuntu:noble
 COPY --from=0 /app /app
 
 RUN apt update
-RUN apt -y install curl
+RUN apt -y install curl traceroute
 
 CMD /app/shank-jumpbox

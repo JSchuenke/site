@@ -53,6 +53,6 @@ deploy-dev-kind-nuke:
 
 	if [ "$(shell helm list --namespace shank -o json | jq '.[0].status')" == "deployed" ]; then \
 		helm uninstall shank-site -n shank; \
-	else \
-		helm install shank-site ./helm -n shank; \
 	fi
+	
+	helm install shank-site ./helm -n shank;
