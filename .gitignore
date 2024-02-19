@@ -1,5 +1,4 @@
-helm/charts/
-*.tgz
+helm/charts/*.tgz
 
 # Byte-compiled / optimized / DLL files
 __pycache__/

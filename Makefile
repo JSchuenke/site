@@ -18,7 +18,7 @@ delete-kind:
 
 build-images: build-jumpbox
 	for dir in $(REPOS); do \
-        cd $$dir; make build-image; \
+        (cd $$dir; make build-image); \
     done
 
 build-jumpbox:
@@ -37,6 +37,22 @@ deploy-dev-kind:
 
 	if [ "$(shell helm list --namespace shank -o json | jq '.[0].status')" == "deployed" ]; then \
 		helm upgrade shank-site ./helm -n shank; \
+	else \
+		helm install shank-site ./helm -n shank; \
+	fi
+
+deploy-dev-kind-nuke: 
+	if [ "$(shell kubectl get namespace shank -o 'jsonpath={.status.phase}')" == "Active" ]; then \
+		echo "Namespace already exists"; \
+	else \
+		echo "Namespace doesn't exist"; \
+		kubectl create namespace shank; \
+	fi
+
+	cd helm; helm dependency update
+
+	if [ "$(shell helm list --namespace shank -o json | jq '.[0].status')" == "deployed" ]; then \
+		helm uninstall shank-site -n shank; \
 	else \
 		helm install shank-site ./helm -n shank; \
 	fi

@@ -31,7 +31,10 @@ EOF
 RUN go mod download
 RUN CGO_ENABLED=0 GOOS=linux go build -o /app
 
-FROM busybox
+FROM ubuntu:noble
 COPY --from=0 /app /app
+
+RUN apt update
+RUN apt -y install curl
 
 CMD /app/shank-jumpbox
