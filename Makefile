@@ -1,4 +1,5 @@
 REPOS := shank-flask shank-vue shank-go
+tag := shank/shank-jumpbox:0.1
 
 .PHONY: all
 all: deploy-kind delete-kind dev-deploy-kind build-images
@@ -15,12 +16,16 @@ deploy-kind:
 delete-kind:
 	kind delete cluster
 
-build-images:
+build-images: build-jumpbox
 	for dir in $(REPOS); do \
         cd $$dir; make build-image; \
     done
 
-dev-deploy-kind:
+build-jumpbox:
+	docker build -t $(tag) .
+	kind load docker-image --name kind $(tag)
+
+deploy-dev-kind: 
 	if [ "$(shell kubectl get namespace shank -o 'jsonpath={.status.phase}')" == "Active" ]; then \
 		echo "Namespace already exists"; \
 	else \
