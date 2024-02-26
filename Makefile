@@ -22,7 +22,7 @@ build-images: build-jumpbox
     done
 
 build-jumpbox:
-	docker build -t $(tag) .
+	docker build -t $(tag) -f Dockerfile.jumpbox .
 	kind load docker-image --name kind $(tag)
 
 deploy-dev-kind: 
