@@ -1,14 +1,14 @@
-# Default values for shank-site.
+# Default values for api-go.
 # This is a YAML-formatted file.
 # Declare variables to be passed into your templates.
 
 replicaCount: 1
 
 image:
-  repository: shank/jumpbox
+  repository: nginx
   pullPolicy: IfNotPresent
   # Overrides the image tag whose default is the chart appVersion.
-  tag: "0.1"
+  tag: ""
 
 imagePullSecrets: []
 nameOverride: ""

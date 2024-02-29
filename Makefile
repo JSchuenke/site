@@ -1,5 +1,5 @@
-REPOS := shank-flask shank-vue shank-go
-tag := shank/shank-jumpbox:0.1
+REPOS := frontend-vue api-go api-python
+tag := shank/jumpbox:0.1
 
 .PHONY: all
 all: deploy-kind delete-kind dev-deploy-kind build-images
@@ -25,6 +25,8 @@ build-jumpbox:
 	docker build -t $(tag) -f Dockerfile.jumpbox .
 	kind load docker-image --name kind $(tag)
 
+build-deploy: build-images deploy-dev-kind
+
 deploy-dev-kind: 
 	if [ "$(shell kubectl get namespace shank -o 'jsonpath={.status.phase}')" == "Active" ]; then \
 		echo "Namespace already exists"; \
@@ -41,7 +43,7 @@ deploy-dev-kind:
 		helm install shank-site ./helm -n shank; \
 	fi
 
-deploy-dev-kind-nuke: 
+deploy-dev-kind-nuke: delete-kind deploy-kind
 	if [ "$(shell kubectl get namespace shank -o 'jsonpath={.status.phase}')" == "Active" ]; then \
 		echo "Namespace already exists"; \
 	else \

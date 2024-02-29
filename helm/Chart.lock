@@ -1,12 +1,12 @@
 dependencies:
-- name: shank-vue
-  repository: file://../shank-vue/helm
+- name: frontend-vue
+  repository: file://../frontend-vue/helm
   version: 0.1.0
-- name: shank-flask
-  repository: file://../shank-flask/helm
+- name: api-python
+  repository: file://../api-python/helm
   version: 0.1.0
-- name: shank-go
-  repository: file://../shank-go/helm
+- name: api-go
+  repository: file://../api-go/helm
   version: 0.1.0
-digest: sha256:713702bf657cea421638233b8b41014a073a9d662df8c7acb8fcf0f2af09b720
-generated: "2024-02-02T13:21:49.793123-05:00"
+digest: sha256:c8d98d2c8e34f4bf17b50a251de0d4df352c1dd8824586cae4fb5c8b4e83398e
+generated: "2024-02-29T15:15:49.318756-05:00"

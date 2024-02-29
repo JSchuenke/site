@@ -22,7 +22,7 @@ func main() {
 EOF
 
 COPY <<EOF ./go.mod
-module JSchuenke/gihub.com/shank-jumpbox
+module JSchuenke/gihub.com/jumpbox
 
 go 1.21.5
 EOF
@@ -37,4 +37,4 @@ COPY --from=0 /app /app
 RUN apt update
 RUN apt -y install curl traceroute
 
-CMD /app/shank-jumpbox
+CMD /app/jumpbox

@@ -31,13 +31,13 @@ jobs:
         with:
           node-version: '21.x'
       - run: npm ci
-        working-directory: shank-vue
+        working-directory: frontend-vue
       - run: npm run build --if-present
-        working-directory: shank-vue
+        working-directory: frontend-vue
       - uses: actions/upload-artifact@master
         with:
           name: static-site
-          path: shank-vue/dist
+          path: frontend-vue/dist
   # Single deploy job since we're just deploying
   deploy:
     environment:
