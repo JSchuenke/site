@@ -1,6 +1,7 @@
 {{- if .Values.ingress.enabled -}}
 
 {{- $fullName := include "frontend-vue.fullname" . -}}
+{{- $name := include "frontend-vue.name" . -}}
 {{- $svcPort := .Values.service.port -}}
 
 {{- if and .Values.ingress.className (not (semverCompare ">=1.18-0" .Capabilities.KubeVersion.GitVersion)) }}
@@ -53,11 +54,11 @@ spec:
             backend:
               {{- if semverCompare ">=1.19-0" $.Capabilities.KubeVersion.GitVersion }}
               service:
-                name: {{ $fullName }}
+                name: {{ $name }}
                 port:
                   number: {{ $svcPort }}
               {{- else }}
-              serviceName: {{ $fullName }}
+              serviceName: {{ $name }}
               servicePort: {{ $svcPort }}
               {{- end }}
           {{- end }}
