@@ -4,7 +4,7 @@ tag := shank/api-python:0.1
 all: venv-activate dev-start-local build-image freeze
 
 venv-activate:
-	./venv/bin/activate
+	./.venv/bin/activate
 
 dev-start-local:
 	uvicorn main:app --reload
