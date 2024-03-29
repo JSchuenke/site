@@ -23,7 +23,7 @@ jobs:
         with:
           python-version: '3.11'
           cache: 'pip' # caching pip dependencies
-          
+
       - run: pip install -r requirements.txt
         working-directory: api-python
 
@@ -34,3 +34,5 @@ jobs:
 
       - name: Run ruff
         uses: davidslusser/actions_python_ruff@v1.0.1
+        with:
+          src: "api-python"
