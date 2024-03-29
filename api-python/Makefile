@@ -14,4 +14,4 @@ build-image:
 	kind load docker-image --name kind $(tag)
 
 freeze:
-	pip freeze > requirements.txt
+	pip list --format=freeze > requirements.txt
