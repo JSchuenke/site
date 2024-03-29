@@ -9,13 +9,12 @@ import MainHeader from './components/MainHeader.vue'
     <img alt="Vue logo" class="logo" src="./assets/jake_the_dog1.png" width="125" height="125" />
 
     <div class="wrapper">
-      <Display/>
-      <MainHeader />
+      <MainBanner/>
     </div>
   </header>
 
   <main>
-    <MainBanner />
+    <Display/>
   </main>
 </template>
 
