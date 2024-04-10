@@ -1,4 +1,4 @@
-name: Vue Frontend
+name: Vue Linting
 
 on:
   push:

@@ -1,4 +1,4 @@
-name: Python API Linting and Testing
+name: Python Linting
 
 on:
   push:
