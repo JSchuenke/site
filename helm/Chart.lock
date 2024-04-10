@@ -8,5 +8,8 @@ dependencies:
 - name: api-go
   repository: file://../api-go/helm
   version: 0.1.0
-digest: sha256:c8d98d2c8e34f4bf17b50a251de0d4df352c1dd8824586cae4fb5c8b4e83398e
-generated: "2024-02-29T15:15:49.318756-05:00"
+- name: api-nodejs
+  repository: file://../api-nodejs/helm
+  version: 0.1.0
+digest: sha256:703dab8f6ab30cb43cdecc2d38f17022b95fae1192cef8dd22a0be96a9ab5db9
+generated: "2024-04-10T12:04:10.195578-06:00"

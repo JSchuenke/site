@@ -1,4 +1,4 @@
-REPOS := frontend-vue api-go api-python
+REPOS := frontend-vue api-go api-python api-nodejs
 tag := shank/jumpbox:0.1
 
 .PHONY: all
@@ -43,7 +43,7 @@ deploy-dev-kind:
 		helm install shank-site ./helm -n shank; \
 	fi
 
-deploy-dev-kind-nuke: delete-kind deploy-kind
+deploy-dev-kind-nuke: delete-kind deploy-kind build-images
 	if [ "$(shell kubectl get namespace shank -o 'jsonpath={.status.phase}')" == "Active" ]; then \
 		echo "Namespace already exists"; \
 	else \
