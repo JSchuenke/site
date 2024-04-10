@@ -1,4 +1,4 @@
-name: Javascript Linting and Testing
+name: Vue Frontend
 
 on:
   push:
