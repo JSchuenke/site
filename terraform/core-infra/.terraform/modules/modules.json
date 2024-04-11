@@ -1,0 +1,1 @@
+{"Modules":[{"Key":"","Source":"","Dir":"."},{"Key":"ecs_cluster","Source":"registry.terraform.io/terraform-aws-modules/ecs/aws//modules/cluster","Version":"5.11.1","Dir":".terraform/modules/ecs_cluster/modules/cluster"},{"Key":"vpc","Source":"registry.terraform.io/terraform-aws-modules/vpc/aws","Version":"5.7.1","Dir":".terraform/modules/vpc"}]}
