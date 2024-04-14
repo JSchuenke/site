@@ -11,6 +11,8 @@ locals {
   vpc_cidr = "10.0.0.0/16"
   azs      = slice(data.aws_availability_zones.available.names, 0, 3)
 
+  container_name = 
+
   tags = {
     Blueprint  = local.name
     GithubRepo = "github.com/aws-ia/ecs-blueprints"
@@ -84,10 +86,9 @@ resource "aws_lb_target_group" "core-api" {
   vpc_id   = module.vpc.vpc_id
 }
 
-
 resource "aws_ecs_service" "core-api" {
   name            = "core-api"
-  cluster         = aws_ecs_cluster.main.id
+  cluster         = module.ecs_cluster.main.ecs_cluster_id
   task_definition = aws_ecs_task_definition.core-api.arn
   desired_count   = 3
   iam_role        = aws_iam_role.ecs.arn
