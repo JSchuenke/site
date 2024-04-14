@@ -87,9 +87,7 @@ resource "aws_lb_target_group" "core-api" {
 resource "aws_ecs_task_definition" "core-api" {
   family = "coreapi"
 
-  container_definitions = <<DEFINITION
-  ${{file("${path.module}/core-api.task.json")}}
-DEFINITION
+  container_definitions = ${{file("${path.module}/core-api.task.json")}}
 }
 
 
