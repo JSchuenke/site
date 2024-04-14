@@ -86,7 +86,7 @@ resource "aws_lb_target_group" "core-api" {
 
 
 resource "aws_ecs_service" "core-api" {
-  name            = "core-apidb"
+  name            = "core-api"
   cluster         = aws_ecs_cluster.main.id
   task_definition = aws_ecs_task_definition.core-api.arn
   desired_count   = 3
