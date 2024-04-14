@@ -39,26 +39,6 @@ module "ecs_cluster" {
   tags = local.tags
 }
 
-resource "aws_iam_role_policy" "ecs" {
-  name = "ecs_policy"
-  role = aws_iam_role.test_role.id
-
-  # Terraform's "jsonencode" function converts a
-  # Terraform expression result to valid JSON syntax.
-  policy = jsonencode({
-    Version = "2012-10-17"
-    Statement = [
-      {
-        Action = [
-          "ec2:Describe*",
-        ]
-        Effect   = "Allow"
-        Resource = "*"
-      },
-    ]
-  })
-}
-
 resource "aws_iam_role" "ecs" {
   name = "ecs"
 
@@ -72,6 +52,26 @@ resource "aws_iam_role" "ecs" {
         Principal = {
           Service = "ec2.amazonaws.com"
         }
+      },
+    ]
+  })
+}
+
+resource "aws_iam_role_policy" "ecs" {
+  name = "ecs_policy"
+  role = aws_iam_role.ecs.id
+
+  # Terraform's "jsonencode" function converts a
+  # Terraform expression result to valid JSON syntax.
+  policy = jsonencode({
+    Version = "2012-10-17"
+    Statement = [
+      {
+        Action = [
+          "ec2:Describe*",
+        ]
+        Effect   = "Allow"
+        Resource = "*"
       },
     ]
   })
