@@ -11,6 +11,8 @@ locals {
   vpc_cidr = "10.0.0.0/16"
   azs      = slice(data.aws_availability_zones.available.names, 0, 3)
 
+  container_name = 
+
   tags = {
     Blueprint  = local.name
     GithubRepo = "github.com/aws-ia/ecs-blueprints"
@@ -83,6 +85,15 @@ resource "aws_lb_target_group" "core-api" {
   protocol = "HTTP"
   vpc_id   = module.vpc.vpc_id
 }
+
+resource "aws_ecs_task_definition" "core-api" {
+  family = "coreapi"
+
+  container_definitions = <<DEFINITION
+  ${{file("${path.module}/core-api.task.json")}}
+DEFINITION
+}
+
 
 resource "aws_ecs_service" "core-api" {
   name            = "core-api"
