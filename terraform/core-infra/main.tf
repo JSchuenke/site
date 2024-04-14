@@ -39,6 +39,77 @@ module "ecs_cluster" {
   tags = local.tags
 }
 
+resource "aws_iam_role_policy" "ecs" {
+  name = "ecs_policy"
+  role = aws_iam_role.test_role.id
+
+  # Terraform's "jsonencode" function converts a
+  # Terraform expression result to valid JSON syntax.
+  policy = jsonencode({
+    Version = "2012-10-17"
+    Statement = [
+      {
+        Action = [
+          "ec2:Describe*",
+        ]
+        Effect   = "Allow"
+        Resource = "*"
+      },
+    ]
+  })
+}
+
+resource "aws_iam_role" "ecs" {
+  name = "ecs"
+
+  assume_role_policy = jsonencode({
+    Version = "2012-10-17"
+    Statement = [
+      {
+        Action = "sts:AssumeRole"
+        Effect = "Allow"
+        Sid    = ""
+        Principal = {
+          Service = "ec2.amazonaws.com"
+        }
+      },
+    ]
+  })
+}
+
+resource "aws_lb_target_group" "core-api" {
+  name     = "core-api-lb-tg"
+  port     = 80
+  protocol = "HTTP"
+  vpc_id   = aws_vpc.main.id
+}
+
+
+resource "aws_ecs_service" "core-api" {
+  name            = "core-apidb"
+  cluster         = aws_ecs_cluster.main.id
+  task_definition = aws_ecs_task_definition.core-api.arn
+  desired_count   = 3
+  iam_role        = aws_iam_role.ecs.arn
+  depends_on      = [aws_iam_role_policy.ecs]
+
+  ordered_placement_strategy {
+    type  = "binpack"
+    field = "cpu"
+  }
+
+  load_balancer {
+    target_group_arn = aws_lb_target_group.core-api.arn
+    container_name   = "core-api"
+    container_port   = 8080
+  }
+
+  placement_constraints {
+    type       = "memberOf"
+    expression = "attribute:ecs.availability-zone in [us-west-2a, us-west-2b]"
+  }
+}
+
 ################################################################################
 # Service Discovery
 ################################################################################
@@ -79,3 +150,6 @@ module "vpc" {
 
   tags = local.tags
 }
+
+
+
