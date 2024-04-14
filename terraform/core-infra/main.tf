@@ -87,13 +87,13 @@ resource "aws_lb_target_group" "core-api" {
 resource "aws_ecs_task_definition" "core-api" {
   family = "coreapi"
 
-  container_definitions = ${{file("${path.module}/core-api.task.json")}}
+  container_definitions = file("${path.module}/core-api.task.json")
 }
 
 
 resource "aws_ecs_service" "core-api" {
   name            = "core-api"
-  cluster         = module.ecs_cluster.main.ecs_cluster_id
+  cluster         = module.ecs_cluster.id
   task_definition = aws_ecs_task_definition.core-api.arn
   desired_count   = 3
   iam_role        = aws_iam_role.ecs.arn
