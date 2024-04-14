@@ -4,15 +4,9 @@ name: 'Terraform Core Infra'
 on:
   push:
     branches: [ "main" ]
-    paths: 'terraform/core-infra/*'
-    paths-ignore:
-      - "**.tfstate"
-      - "**.tfstate.encrypted"
+    paths: 'terraform/core-infra/*.tf'
   pull_request:
-    paths: 'terraform/core-infra/*'
-    paths-ignore:
-      - "**.tfstate"
-      - "**.tfstate.encrypted"
+    paths: 'terraform/core-infra/*.tf'
 
 permissions:
   contents: read
