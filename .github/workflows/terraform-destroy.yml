@@ -45,6 +45,9 @@ jobs:
           location: repository
           github_token: ${{ github.TOKEN }}
 
+    - name: Terraform Init
+      run: terraform init
+
     # - name: Require Approval
     #   uses: trstringer/manual-approval@v1
     #   with:
