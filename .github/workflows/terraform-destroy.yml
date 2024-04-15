@@ -2,8 +2,7 @@
 name: 'Terraform Destroy Core Infra'
 
 on:
-  push:
-    paths: "abcdefghijklmnop.tf"
+  workflow_dispatch:
 
 permissions:
   contents: read
